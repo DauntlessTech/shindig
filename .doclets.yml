@@ -1,5 +1,4 @@
-dir: src
-  dir: js
+dir: src/js
 packageJson: package.json
 articles:
   - Overview: README.md
