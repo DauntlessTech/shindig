@@ -8,6 +8,6 @@ Shindig event planner is a web application that allows people to create and shar
 
 FRAMEWORK      | ROLE
 -------------- | ---------------------------------------
-Handlebars     | Templating
+MustacheJS     | Templating
 Gulp           | Compile and compress SASS JS and Images
 MaterializeCSS | UI Design and Animations

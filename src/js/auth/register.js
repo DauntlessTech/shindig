@@ -11,12 +11,14 @@ var ref, email = '',
 
 function getRef() {
   ref = new Firebase("https://shindigevents.firebaseio.com");
+  // TODO remove this
+  console.log('potato');
 }
 
 /**
  * register - description
  *
- * @param  {type} e description 
+ * @param  {type} e description
  * @param  {type} p description
  * @param  {type} n description
  * @param  {type} o description
