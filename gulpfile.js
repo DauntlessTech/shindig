@@ -13,20 +13,10 @@ var gulp = require('gulp'),
 
 gulp.task("pages", function() {
   console.log('-- gulp is running task "pages"');
-  gulp.src('src/index.html')
+  gulp.src('src/*.html')
     .pipe(include())
     .on('error', console.log)
     .pipe(gulp.dest('dist/'));
-
-  gulp.src('src/html/*.html')
-    .pipe(include())
-    .on('error', console.log)
-    .pipe(gulp.dest('dist/html'));
-
-  gulp.src('src/html/*.tpl')
-    .pipe(include())
-    .on('error', console.log)
-    .pipe(gulp.dest('dist/templates'));
 });
 
 gulp.task('styles', function() {
@@ -74,11 +64,9 @@ gulp.task('lint', function() {
 });
 
 gulp.task('live', function() {
-  gulp.watch('src/js/**/*.js', ['compress']);
+  gulp.watch('src/js/**/*.js', ['lint', 'compress', 'modernizr']);
   gulp.watch('src/sass/**/*.scss', ['styles']);
-  gulp.watch('src/index.html', ['pages']);
-  gulp.watch('src/html/*.html', ['pages']);
-  gulp.watch('src/templates/*.hbs', ['templates']);
+  gulp.watch('src/*.html', ['pages']);
   gulp.watch('src/images/**', ['images']);
 });
 

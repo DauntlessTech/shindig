@@ -1,5 +1,14 @@
 var view, source, template, context, html, ref;
 $(function() {
+  getRef();
+});
+
+// set the handler for when the user logs in
+function handle_login(){
+  login('email', $('#login_email').val(), $('#login_pass').val());
+}
+
+function getRef(){
   //get firebase reference
   var firebase = $.getScript('https://cdn.firebase.com/js/client/2.2.1/firebase.js');
   firebase.then(function() {
@@ -8,7 +17,7 @@ $(function() {
   }, function(err) {
     console.log(err);
   });
-});
+}
 
 function init() {
   if (localStorage) {
@@ -33,10 +42,8 @@ function init() {
 }
 
 function structure() {
-
   source = $('#nav_template').html();
   template = Handlebars.compile(source);
-  ref = new Firebase("https://shindigevents.firebaseio.com");
   Handlebars.registerPartial("loginPartial", template);
   context = tern(ref.getAuth(), {
     login_option_routing: 'route("events")',
@@ -44,7 +51,7 @@ function structure() {
     login_option_text: 'Logout'
   }, {
     login_option_routing: 'route("landing_page")',
-    login_option_function: 'route("register")',
+    login_option_function: 'route("auth")',
     login_option_text: 'Login or Register'
   });
 
@@ -60,7 +67,9 @@ function structure() {
 
 function checkLogin() {
   if(ref.getAuth()){
-    location.reload();
+    return 'logged in';
+  }else{
+    return 'logged out';
   }
 }
 
@@ -71,24 +80,24 @@ function tern(condition, option1, option2) {
 
 function logout() {
   ref.unauth();
-  route('landing_page');
   location.reload();
 }
 
-function register_template() {
-  $.getScript('js/auth/register.js').then(function() {
-    ref = new Firebase("https://shindigevents.firebaseio.com");
-    var authData = ref.getAuth();
-    if (authData) {
+function auth_template() {
+  $.getScript('js/auth/auth.js').then(function() {
+    if(ref.getAuth()) {
       $('#template_container').html('');
       $('#template_container').hide(0);
-      source = $('#register').html();
+
+      source = $('#auth').html();
       template = Handlebars.compile(source);
-      localStorage.setItem('state', 'register');
+      localStorage.setItem('state', 'auth');
+
       html = template(context);
       $('#template_container').append(html);
       $('#template_container').show(500);
     } else {
+      console.log(ref.getAuth());
       route('manual_registration');
     }
   });
@@ -97,14 +106,14 @@ function register_template() {
 function manual_registration() {
   var firebase = $.getScript('https://cdn.firebase.com/js/client/2.2.1/firebase.js');
   firebase.then(function() {
-    AddScript('js/auth/register.js');
+    AddScript('js/auth/auth.js');
   }, function(err) {
     console.log(err);
   });
 
   var jqUI = $.getScript('https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.min.js');
   jqUI.then(function() {
-    AddScript('js/auth/register_email.js');
+    AddScript('js/auth/auth.js');
   }, function(err) {
     console.log(err);
   });
@@ -143,8 +152,8 @@ function route(template_name) {
       manual_registration();
       $('#template_container').show(500);
       break;
-    case 'register':
-      register_template();
+    case 'auth':
+      auth_template();
       $('#template_container').show(500);
       break;
     case 'landing_page':

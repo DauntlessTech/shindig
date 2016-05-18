@@ -37,7 +37,7 @@
             <ul class="side-nav" id="mobile-nav">
               <!-- TODO add support for profile views. -->
               <li class="row right-align" id="profile_template_container">
-                <a onclick="route('register'); $('.button-collapse').sideNav('hide');" class="btn waves-effect">Login/Register</a>
+                <a onclick="route('auth'); $('.button-collapse').sideNav('hide');" class="btn waves-effect">Login/Register</a>
               </li>
               <li class="row">
                 <a onclick="route('events'); $('.button-collapse').sideNav('hide');" class="">
@@ -63,7 +63,7 @@
     </script>
 
     <!-- Already Authenticated -->
-    <script id="register" type="text/x-handlebars-template">
+    <script id="auth" type="text/x-handlebars-template">
       <div class="container">
         <div class="center">
           <h4>
@@ -275,7 +275,7 @@
           Login
         </h4>
       </div>
-      <form class="row">
+      <form class="row" autocomplete="on">
         <div class="input-field col s12">
           <i class="material-icons prefix">email</i>
           <label for="login_email" data-error="someone@example.com" data-success="&#10003;">Email</label>
@@ -286,10 +286,11 @@
           <label for="login_pass">Password</label>
           <input type="password" name="password" id="login_pass" required/>
         </div>
+        <div class="row">
+          <a class="btn waves-effect light-blue lighten-2" id="login_button" onclick="handle_login();">Submit</a>
+        </div>
       </form>
-      <div class="row">
-        <a class="btn waves-effect light-blue lighten-2" onclick="login();">Submit</a>
-      </div>
+
     </script>
 
     <!-- MANUAL REGISTRATION -->
@@ -326,7 +327,7 @@
                 Already have an account?
               </p>
               <div class="row">
-                <a onclick="route('login');" class="btn-flat light-blue lighten-2">Log In</a>
+                <a onclick="route('login');" class="btn light-blue lighten-2">Log In</a>
               </div>
             </div>
           </div>
@@ -397,12 +398,12 @@
     <!-- LANDING PAGE -->
     <script id="landing_page" type="text/x-handlebars-template">
       <div class="row">
-        <img src="{{image}}" class="responsive-img" onclick="route('register');"/>
+        <img src="{{image}}" class="responsive-img" onclick="route('auth');"/>
         <h3 class="">{{title}}</h3>
         <p class="flow-text col s12 m10 push-m1">shindig is a unique way to create events and share them instantly with the entire world.</p>
       </div>
       <div class="row">
-        <a onclick="route('register')" class="margin-top-2 margin-bottom-1 btn center waves-effect waves-light center">get started!</a>
+        <a onclick="route('auth')" class="margin-top-2 margin-bottom-1 btn center waves-effect waves-light center">get started!</a>
       </div>
     </script>
 
