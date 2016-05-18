@@ -11,11 +11,11 @@ $(function() {
 
 
 /**
- * @member {Firebase} ref - reference to the firebase object
- * @member {string} email - user provided email
- * @member {string} name - user provided name
- * @member {string} password - user provided password
- * @member {array} optional_data - user provided optional data
+ * @param {Firebase} ref - reference to the firebase object
+ * @param {string} email - user provided email
+ * @param {string} name - user provided name
+ * @param {string} password - user provided password
+ * @param {array} optional_data - user provided optional data
  */
 var ref, email = '',
   password = '',
