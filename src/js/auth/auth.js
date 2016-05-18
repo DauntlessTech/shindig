@@ -1,6 +1,3 @@
-/**
- * @file auth.js handles the registration and authentication of users in the database.
- */
 var email = '',
   password = '',
   name = '',
