@@ -74,7 +74,7 @@ function register(e, p, n, o) {
 /**
  * Function for handling the login page.
  * @see register.connect_email
- * @param {email} {@link register.email}
+ * @param {string} {@link register.email}
  */
 function login() {
   email = $('#login_email').val();
