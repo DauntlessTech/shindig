@@ -16,13 +16,12 @@ function getRef() {
 }
 
 /**
- * register - description
+ * The register function creates a new user on the database
  *
- * @param  {type} e description
- * @param  {type} p description
- * @param  {type} n description
- * @param  {type} o description
- * @return {type}   description
+ * @param  {string} e user provided email
+ * @param  {string} p user provided name
+ * @param  {string} n user provided password
+ * @param  {array} o user provided optional data
  */
 function register(e, p, n, o) {
   // Set global data
