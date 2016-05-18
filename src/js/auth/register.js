@@ -1,7 +1,22 @@
+/**
+ * @author Zachary Foutz
+ * @version 1.0.0
+ * @description Register.js handles the registration and authentication of users on the database.
+ * @namespace register
+ */
+
 $(function() {
   getRef();
 });
 
+
+/**
+ * @member {Firebase} ref - reference to the firebase object
+ * @member {string} email - user provided email
+ * @member {string} name - user provided name
+ * @member {string} password - user provided password
+ * @member {array} optional_data - user provided optional data
+ */
 var ref, email = '',
   password = '',
   name = '',
@@ -9,10 +24,11 @@ var ref, email = '',
   user_created = false,
   id;
 
+/**
+ * Gets the database reference from firebase
+ */
 function getRef() {
   ref = new Firebase("https://shindigevents.firebaseio.com");
-  // TODO remove this
-  console.log('potato');
 }
 
 /**
