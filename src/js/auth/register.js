@@ -1,14 +1,16 @@
 /**
- * @author Zachary Foutz
- * @version 1.0.0
- * @description Register.js handles the registration and authentication of users on the database.
- * @namespace register
- * @var {string} email - user provided email
- * @var {string} name - user provided name
- * @var {string} password - user provided password
- * @var {Array.<string>} optional_data - user provided optional data
- */
+* @author Zachary Foutz
+* @version 1.0.0
+* @description Register.js handles the registration and authentication of users on the database.
+* @namespace register
+*/
 
+/**
+* @var {string} email - user provided email
+* @var {string} name - user provided name
+* @var {string} password - user provided password
+* @var {Array.<string>} optional_data - user provided optional data
+*/
 var email = '',
   password = '',
   name = '',
@@ -21,20 +23,20 @@ $(function() {
 });
 
 /**
- * Gets the database reference from firebase
- */
+* Gets the database reference from firebase
+*/
 function getRef() {
   ref = new Firebase("https://shindigevents.firebaseio.com");
 }
 
 /**
- * The register function creates a new user on the database
- * @function register
- * @param  {string} e user provided email
- * @param  {string} p user provided name
- * @param  {string} n user provided password
- * @param  {array} o user provided optional data
- */
+* The register function creates a new user on the database
+* @function register
+* @param  {string} e user provided email
+* @param  {string} p user provided name
+* @param  {string} n user provided password
+* @param  {Array.string} o user provided optional data
+*/
 function register(e, p, n, o) {
   // Set global data
   email = e, password = p, name = n, optional_data = o;
@@ -72,10 +74,11 @@ function register(e, p, n, o) {
 
 
 /**
- * Function for handling the login page.
- * @see register.connect_email
- * @param {string} email {@link register#email}
- */
+* Function for handling the login page.
+* @see connect_email()
+* @param {string} [email]{@link register#e}
+* @param {string} password {@link password}
+*/
 function login() {
   email = $('#login_email').val();
   password = $('#login_pass').val();
