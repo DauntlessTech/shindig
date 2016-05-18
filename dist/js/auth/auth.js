@@ -1,14 +1,45 @@
 /**
- * @author Zachary Foutz
+ * @author Zacary Foutz
  * @version 1.0.0
- * @description Register.js handles the registration and authentication of users on the database.
+ * @description Handles registration and authentication of users in database
+ * @module auth
  */
-var email = '',
-  password = '',
-  name = '',
-  optional_data = [],
-  user_created = false,
-  id;
+
+/**
+ * @memberof module:auth
+ * @description container object for user provided login/registration email
+ */
+var email = '';
+
+/**
+ * @memberof module:auth
+ * @description container object for user provided login/registration password
+ */
+var password = '';
+
+/**
+ * @memberof module:auth
+ * @description container object for user provided registration name
+ */
+var name = '';
+
+/**
+ * @memberof module:auth
+ * @description container object for user provided registration data (employeer | job title | birthday)
+ */
+var optional_data = [];
+
+/**
+ * @memberof module:auth
+ * @description variable to check if the user is actually created upon registration
+ */
+var user_created = false;
+
+/**
+ * @memberof module:auth
+ * @description authenticated user id (currently unused)
+ */
+var id;
 
 /**
  * The auth function creates a new user on the database
@@ -78,8 +109,8 @@ function login(type, e, p) {
       });
       break;
     case 'anon':
-    // TODO Make sure that users get logged in as anonymous if they go to the events page without being logged in
-    // Used only for creating events without an account, no persistent data.
+      // TODO Make sure that users get logged in as anonymous if they go to the events page without being logged in
+      // Used only for creating events without an account, no persistent data.
       ref.authAnonymously(function(error, authData) {
         if (error) {
           alert("Login Failed!", error);

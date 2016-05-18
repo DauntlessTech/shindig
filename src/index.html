@@ -82,6 +82,7 @@
     <!-- EVENTS CONTAINER -->
     <script id="events" type="text/x-handlebars-template">
       <h3>Popular Events</h3>
+      <h4>Sorry, this page has not been implemented yet.</h4>
       <div class="row" id="event_container"></div>
       <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
         <a onclick="route('new_event_form');" class="btn-floating btn-large red">
@@ -206,8 +207,8 @@
           </div>
         </div>
 
-        <div class="card-panel left-align" id="option_panel">
-          <ul class="collapsible popout" data-collapsible="accordion">
+        <div class="left-align" id="option_panel">
+          <ul class="collapsible" data-collapsible="accordion">
             <li class="row margin-bottom-1">
               <div class="collapsible-header row">
                 <a class="btn">Add a guest list</a>
@@ -339,10 +340,7 @@
               <div class="input-field row">
                 <div class="col s12 center">
                   <i class="material-icons large">tag_faces</i>
-                  <h4 class="">
-                    Welcome to shindig
-                    <span class="grey-text" id="namedrop">Zach</span>
-                  </h4>
+                  <h4>Welcome to shindig</h4>
                 </div>
                 <h5 class="center col s8 push-s2 grey-text text-lighten-1">
                   Just one more step and you are ready to go.
@@ -397,17 +395,20 @@
 
     <!-- LANDING PAGE -->
     <script id="landing_page" type="text/x-handlebars-template">
-      <div class="row">
-        <img src="{{image}}" class="responsive-img" onclick="route('auth');"/>
+      <div class="row fullscreen">
         <h3 class="">{{title}}</h3>
-        <p class="flow-text col s12 m10 push-m1">shindig is a unique way to create events and share them instantly with the entire world.</p>
-      </div>
-      <div class="row">
-        <a onclick="route('auth')" class="margin-top-2 margin-bottom-1 btn center waves-effect waves-light center">get started!</a>
+        <div class="banner_button padding-1">
+          <a onclick="route('auth')" class="margin-top-2 margin-bottom-1 white-text center">Get Started</a>
+        </div>
+
+        <div class="banner_message white-text left-align">
+          <p class="">Shindig is a unique way to create and track events.</p>
+        </div>
       </div>
     </script>
 
     <script defer src="js/jquery-min.js"></script>
+    <script async defer src="js/modernizr-min.js"></script>
     <script defer src="js/handlebars-min.js"></script>
     <script defer src="js/templates-min.js"></script>
   </body>

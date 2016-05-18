@@ -5,7 +5,6 @@
  * @module auth
  */
 
-
 /**
  * @memberof module:auth
  * @description container object for user provided login/registration email

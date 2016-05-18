@@ -3,16 +3,14 @@ $(function() {
   getRef();
 });
 
-// set the handler for when the user logs in
-function handle_login(){
-  login('email', $('#login_email').val(), $('#login_pass').val());
-}
+
 
 function getRef(){
   //get firebase reference
   var firebase = $.getScript('https://cdn.firebase.com/js/client/2.2.1/firebase.js');
   firebase.then(function() {
     ref = new Firebase("https://shindigevents.firebaseio.com");
+    AddScript('js/auth/auth-min.js');
     init();
   }, function(err) {
     console.log(err);
@@ -84,7 +82,7 @@ function logout() {
 }
 
 function auth_template() {
-  $.getScript('js/auth/auth.js').then(function() {
+  $.getScript('js/auth/auth-min.js').then(function() {
     if(ref.getAuth()) {
       $('#template_container').html('');
       $('#template_container').hide(0);
@@ -104,16 +102,9 @@ function auth_template() {
 }
 
 function manual_registration() {
-  var firebase = $.getScript('https://cdn.firebase.com/js/client/2.2.1/firebase.js');
-  firebase.then(function() {
-    AddScript('js/auth/auth.js');
-  }, function(err) {
-    console.log(err);
-  });
-
   var jqUI = $.getScript('https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.min.js');
   jqUI.then(function() {
-    AddScript('js/auth/auth.js');
+    AddScript('js/auth/register_email-min.js');
   }, function(err) {
     console.log(err);
   });
@@ -130,10 +121,11 @@ function AddScript(url) {
 //make events template
 function events() {
   //TODO get events from database
+  AddScript('js/event_handler-min.js');
 }
 
 function new_event_form() {
-
+  AddScript('js/event_handler-min.js');
 }
 
 function route(template_name) {
@@ -156,25 +148,20 @@ function route(template_name) {
       auth_template();
       $('#template_container').show(500);
       break;
-    case 'landing_page':
-      context = {
-        image: 'images/group_003.jpg'
-      };
-      $('#template_container').show(500);
-      break;
-    case 'structure':
-      $('#template_container').show(500);
-      break;
     case 'new_event_form':
       new_event_form();
       $('#template_container').show(500);
       break;
+    case 'login':
+      AddScript('js/auth/handle_login-min.js')
+      $('#template_container').show(500);
+      break;
     default:
       context = {};
+      $('#template_container').show(500);
       break;
   }
 
   html = template(context);
   $('#template_container').append(html);
-  $('#template_container').show(500);
 }

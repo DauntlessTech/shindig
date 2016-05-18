@@ -20,6 +20,58 @@ $black: #000;
 	line-height: 600%;
 }
 
+.fullscreen{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  user-select: none;
+
+  // text-shadow: 1px 1px 1px #424242;
+
+  background: #000;
+
+  background-image: url("../images/group_004.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  &:before {
+    content: '';
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+		opacity: .8;
+  }
+}
+
+.banner_button{
+  font-size: 2rem;
+  border: 2px solid white;
+  border-radius: 3px;
+  width: auto;
+  cursor: pointer;
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translate3d(-50%, 40%, 0);
+}
+.banner_button:hover{
+  background-color: #424242;
+  border: 2px solid #424242;
+}
+.banner_message{
+  width: auto;
+  position: fixed;
+  font-size: 1.5rem;
+  top: 40%;
+  left: 50%;
+  transform: translate3d(-50%, -40%, 0);
+}
+
 
 .ui-datepicker {
 	width: auto;
