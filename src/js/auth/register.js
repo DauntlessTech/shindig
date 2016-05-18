@@ -3,26 +3,22 @@
  * @version 1.0.0
  * @description Register.js handles the registration and authentication of users on the database.
  * @namespace register
- */
-
-$(function() {
-  getRef();
-});
-
-
-/**
- * @param {Firebase} ref - reference to the firebase object
  * @param {string} email - user provided email
  * @param {string} name - user provided name
  * @param {string} password - user provided password
- * @param {array} optional_data - user provided optional data
+ * @param {Array.<string>} optional_data - user provided optional data
  */
-var ref, email = '',
+
+var email = '',
   password = '',
   name = '',
   optional_data = [],
   user_created = false,
   id;
+
+$(function() {
+  getRef();
+});
 
 /**
  * Gets the database reference from firebase
@@ -33,7 +29,7 @@ function getRef() {
 
 /**
  * The register function creates a new user on the database
- *
+ * @function register
  * @param  {string} e user provided email
  * @param  {string} p user provided name
  * @param  {string} n user provided password
@@ -74,6 +70,12 @@ function register(e, p, n, o) {
   });
 }
 
+
+/**
+ * Function for handling the login page.
+ * @see register.connect_email
+ * @param {email} {@link register.email}
+ */
 function login() {
   email = $('#login_email').val();
   password = $('#login_pass').val();
