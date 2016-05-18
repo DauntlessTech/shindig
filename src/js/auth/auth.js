@@ -1,5 +1,9 @@
-
-/** @module auth handles registration and authentication of users in database */
+/**
+ * @author Zacary Foutz
+ * @version 1.0.0
+ * @description Handles registration and authentication of users in database
+ * @module auth
+ */
 
 
 var email = '',
@@ -77,8 +81,8 @@ function login(type, e, p) {
       });
       break;
     case 'anon':
-    // TODO Make sure that users get logged in as anonymous if they go to the events page without being logged in
-    // Used only for creating events without an account, no persistent data.
+      // TODO Make sure that users get logged in as anonymous if they go to the events page without being logged in
+      // Used only for creating events without an account, no persistent data.
       ref.authAnonymously(function(error, authData) {
         if (error) {
           alert("Login Failed!", error);
