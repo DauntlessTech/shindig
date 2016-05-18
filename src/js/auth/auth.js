@@ -1,7 +1,5 @@
 /**
- * @author Zachary Foutz
- * @version 1.0.0
- * @description Register.js handles the registration and authentication of users on the database.
+ * @file auth.js handles the registration and authentication of users in the database.
  */
 var email = '',
   password = '',
