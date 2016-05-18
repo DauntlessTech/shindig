@@ -1,4 +1,7 @@
-file: src/templates.js
+files:
+  - src/js/templates.js
+  - src/js/auth/register.js
+  - src/js/auth/register_email.js
 packageJson: package.json
 articles:
   - Overview: README.md
