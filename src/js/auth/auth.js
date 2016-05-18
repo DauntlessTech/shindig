@@ -1,3 +1,7 @@
+
+/** @module auth handles registration and authentication of users in database */
+
+
 var email = '',
   password = '',
   name = '',
