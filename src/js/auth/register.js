@@ -3,10 +3,10 @@
  * @version 1.0.0
  * @description Register.js handles the registration and authentication of users on the database.
  * @namespace register
- * @param {string} email - user provided email
- * @param {string} name - user provided name
- * @param {string} password - user provided password
- * @param {Array.<string>} optional_data - user provided optional data
+ * @member {string} email - user provided email
+ * @member {string} name - user provided name
+ * @member {string} password - user provided password
+ * @member {Array.<string>} optional_data - user provided optional data
  */
 
 var email = '',
@@ -74,7 +74,7 @@ function register(e, p, n, o) {
 /**
  * Function for handling the login page.
  * @see register.connect_email
- * @param {string} email {@link register.email}
+ * @param {string} email {@link register#email}
  */
 function login() {
   email = $('#login_email').val();
