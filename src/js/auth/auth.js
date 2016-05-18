@@ -7,14 +7,35 @@
 
 
 /**
- * @global
+ * @private
+ * @description container object for user provided login/registration email
  */
-var email = '',
-  password = '',
-  name = '',
-  optional_data = [],
-  user_created = false,
-  id;
+var email = '';
+/**
+ * @private
+ * @description container object for user provided login/registration password
+ */
+var password = '';
+/**
+ * @private
+ * @description container object for user provided registration name
+ */
+var name = '';
+/**
+ * @private
+ * @description container object for user provided registration data (employeer | job title | birthday)
+ */
+var optional_data = [];
+/**
+ * @private
+ * @description variable to check if the user is actually created upon registration
+ */
+var user_created = false;
+/**
+ * @private
+ * @description authenticated user id (currently unused)
+ */
+var id;
 
 /**
  * The auth function creates a new user on the database
