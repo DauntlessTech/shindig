@@ -3,10 +3,10 @@
  * @version 1.0.0
  * @description Register.js handles the registration and authentication of users on the database.
  * @namespace register
- * @member {string} email - user provided email
- * @member {string} name - user provided name
- * @member {string} password - user provided password
- * @member {Array.<string>} optional_data - user provided optional data
+ * @var {string} email - user provided email
+ * @var {string} name - user provided name
+ * @var {string} password - user provided password
+ * @var {Array.<string>} optional_data - user provided optional data
  */
 
 var email = '',
