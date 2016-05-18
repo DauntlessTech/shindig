@@ -7,36 +7,37 @@
 
 
 /**
- * @private
+ * @memberof module:auth
  * @description container object for user provided login/registration email
  */
 var email = '';
 
 /**
- * @private
+ * @memberof module:auth
  * @description container object for user provided login/registration password
  */
 var password = '';
 
 /**
- * @private
+ * @memberof module:auth
  * @description container object for user provided registration name
  */
 var name = '';
 
 /**
+ * @memberof module:auth
  * @description container object for user provided registration data (employeer | job title | birthday)
  */
 var optional_data = [];
 
 /**
- * @private
+ * @memberof module:auth
  * @description variable to check if the user is actually created upon registration
  */
 var user_created = false;
 
 /**
- * @private
+ * @memberof module:auth
  * @description authenticated user id (currently unused)
  */
 var id;
