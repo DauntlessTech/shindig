@@ -6,6 +6,9 @@
  */
 
 
+/**
+ * @global
+ */
 var email = '',
   password = '',
   name = '',
