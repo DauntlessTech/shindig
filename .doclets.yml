@@ -1,4 +1,4 @@
-dir: src/js
+file: src/templates.js
 packageJson: package.json
 articles:
   - Overview: README.md
