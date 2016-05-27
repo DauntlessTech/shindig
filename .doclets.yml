@@ -1,6 +1,0 @@
-dir: src/js/auth
-files:
-  - src/js/templates.js
-packageJson: package.json
-articles:
-  - Overview: README.md
