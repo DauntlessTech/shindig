@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shindig</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/Pretty-Header.css">
+    <link rel="stylesheet" href="assets/css/Pretty-Registration-Form.css">
+    <link rel="stylesheet" href="assets/css/Material-Card.css">
+    <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.css">
+    <link rel="stylesheet" href="assets/css/Material-Card-1.css">
+    <link rel="stylesheet" href="assets/css/Pretty-Login-Form.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top custom-header">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.html">Shindig </a>
+                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar menu_button_span"></span><span class="icon-bar menu_button_span"></span><span class="icon-bar menu_button_span"></span></button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li role="presentation"><a href="login.html" id="login_link" class="custom-navbar">Login </a></li>
+                </ul>
+                <ul class="nav navbar-nav links"></ul>
+            </div>
+        </div>
+    </nav>
+    <div class="alert alert-danger" role="alert" id="register_alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span class="alert-text"><strong>Alert</strong> text.</span></div>
+    <div class="row register-form">
+        <div class="col-md-8 col-md-offset-2">
+            <form class="form-horizontal custom-form" id="register_form" autocomplete="on">
+                <h1>Sign Up</h1>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <label class="control-label" for="name-input-field">Name </label>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <input class="form-control" type="text" name="fname" required="" minlength="3" autofocus="" autocomplete="on" id="register_name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <label class="control-label" for="email-input-field">Email </label>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <input class="form-control" type="email" name="email" required="" maxlength="100" minlength="8" pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" autocomplete="on" inputmode="email" id="register_email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <label class="control-label" for="pawssword-input-field">Password </label>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <input class="form-control" type="password" name="password_one" required="" maxlength="30" minlength="8" pattern="(?=^.{8,30}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;amp;*()_+}{&amp;quot;&amp;quot;:;'?/&amp;gt;.&amp;lt;,]).*$"
+                        autocomplete="on" id="register_password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4 label-column">
+                        <label class="control-label" for="repeat-pawssword-input-field">Repeat Password </label>
+                    </div>
+                    <div class="col-sm-6 input-column">
+                        <input class="form-control" type="password" name="password_two" required="" maxlength="30" minlength="8" pattern="(?=^.{8,30}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;amp;*()_+}{&amp;quot;&amp;quot;:;'?/&amp;gt;.&amp;lt;,]).*$"
+                        id="register_password_2">
+                    </div>
+                </div>
+                <div><a class="btn btn-default" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" role="button" href="#collapse-1" id="add_more_button">Add More</a>
+                    <div class="collapse in" id="collapse-1">
+                        <div class="form-group">
+                            <div class="col-sm-4 label-column">
+                                <label class="control-label" for="dropdown-input-field">Employeer </label>
+                            </div>
+                            <div class="col-sm-6 input-column">
+                                <input class="form-control" type="text" name="employer" id="register_employer">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 label-column">
+                                <label class="control-label" for="dropdown-input-field">Job Title</label>
+                            </div>
+                            <div class="col-sm-6 input-column">
+                                <input class="form-control" type="text" name="title" id="register_job_title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 label-column">
+                                <label class="control-label" for="dropdown-input-field">Birthday </label>
+                            </div>
+                            <div class="col-sm-6 input-column">
+                                <input class="form-control" type="date" name="birthday" id="register_birthday">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-default submit-button" type="button" id="register_submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+</body>
+
+</html>
