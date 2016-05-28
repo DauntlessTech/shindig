@@ -1,16 +1,19 @@
+var database, birthday, isAuth, startDate, endDate, uid, username, loggedIn;
+
 document.addEventListener('DOMContentLoaded', function() {
-  //AddScript('dist/js/jquery.min.js');
   init();
 }, false);
 window.onload = function() {
-  addEventHandlers();
-  createValidator();
+  $.getScript('https://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.js').then(function() {
+    addEventHandlers();
+    createValidator();
+  });
 }
-var database, birthday, isAuth, startDate, endDate, uid, username;
+
 
 function logout() {
   firebase.auth().signOut();
-  location.replace('index.html');
+  loggedIn = false;
 }
 'use strict';
 
@@ -31,33 +34,27 @@ function init() {
         uid = user.uid;
         firebase.database().ref('users/' + user.uid).on('value', function(snapshot) {
           username = snapshot.val().displayName;
+          $('#event_host').attr('value', username);
         });
+        loggedIn = true;
         getEvents();
-        $('#login_link').hide();
-        $('#sign_up_button').hide();
-        $('#logout_button').show();
-        $('#create_event_alert').hide();
       } else {
-        $('#login_link').show();
-        $('#sign_up_button').show();
-        $('#logout_button').hide();
-        $('#create_event_alert').show();
+        loggedIn = false;
         console.log("Not currently logged in");
       }
     });
     database = firebase.database();
   });
 }
-// function for dynamically loading js scripts
-// NOTE may be unneed due to $.getScript performing essentially the same function
-
-function AddScript(url) {
+// function for dynamically loading js scripts before jquery loads
+function AddScript(url, type) {
   var script = document.createElement("script");
-  script.type = "text/javascript";
+  script.type = "text/" + type;
   script.src = url;
   document.body.appendChild(script);
   document.body.removeChild(document.body.lastChild);
 }
+
 'use strict';
 
 function addEventHandlers() {
@@ -70,23 +67,20 @@ function addEventHandlers() {
   $('#register_submit').click(function(e) {
     register();
   });
+  $('#collapse_toggle').click(function() {
+    $('.collapse').slideToggle(500);
+  });
   $('#new_event').click(function(e) {
     location.replace("create_event.html");
   });
   $('#register_birthday').change(function(e) {
-    birthday = prettyDate(false, '$(register_birthday).val()', null);
+    birthday = $(register_birthday).val();
   });
   $('#event_start_date').change(function(e) {
-    startDate = prettyDate(true, '$(event_start_date).val()', $('#event_start_time').val());
-  });
-  $('#event_start_time').change(function(e) {
-    startDate = prettyDate(true, '$(event_start_date).val()', $('#event_start_time').val());
+    startDate = $(event_start_date).val();
   });
   $('#event_end_date').change(function(e) {
-    endDate = prettyDate(true, '$(event_end_date).val()', $('#event_end_time').val());
-  });
-  $('#event_end_time').change(function(e) {
-    startDate = prettyDate(true, '$(event_end_date).val()', $('#event_end_time').val());
+    endDate = $(event_end_date).val();
   });
   $('#create_event_submit_button').click(function(e) {
     createEvent();
@@ -97,15 +91,8 @@ function addEventHandlers() {
 }
 // Make the dates conform!
 
-function prettyDate(nullTime, old_date, time) {
+function prettyDate(old_date) {
   var formattedDate = new Date(old_date);
-  if (nullTime) {
-    time = time.split(':');
-    formattedDate.setHours(time[0]);
-    formattedDate.setMinutes(time[1]);
-  } else {
-    formattedDate.setHours(24);
-  }
   var day = formattedDate.getDay();
   var date = formattedDate.getDate();
   var mon = formattedDate.getMonth();
@@ -199,41 +186,55 @@ function register() {
       birthday: birthday
     },
     password, register_user;
+
   if ($('#register_form').valid()) {
     password = pass1;
     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode == 'auth/weak-password') {
-        $('#register_alert').show();
-        $('.alert-text').text(error.message);
+        console.log(error.message);
       } else if (errorCode == 'auth/email-already-in-use') {
-        $('#register_alert').show();
-        $('.alert-text').text(error.message);
+        console.log(error.message);
       } else {
         console.error(error);
       }
     }).then(function(e) {
-      register_user = new User(e.uid, name, email, password, options);
+      register_user = new User(e.uid, name, e.email, password, options);
       writeUserData(register_user);
-      login(email, password);
+      firebase.auth().signInWithEmailAndPassword(e.email, password)
+      .catch(function(error){
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == "auth/user-not-found") {
+          alert('This email was not found in our database.');
+        } else {
+          console.log(error.code + " " + error.message);
+        }
+        return;
+      });
     });
+    location.replace('events.html');
   }
 }
 
 function login(email, password) {
-  var login_form_email = $('#login_email').val();
-  var login_form_password = $('#login_password').val();
-  if (login_form_email !== null || login_form_password !== null) {
-    email = login_form_email;
-    password = login_form_password;
+  if (email == null || password !== null) {
+    email = $('#login_email').val();
+    password = $('#login_password').val();
   }
   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
     var errorCode = error.code;
     var errorMessage = error.message;
-    // TODO add error handles
-  }).then(function(e) {
-    location.replace('index.html');
+    if (errorCode == "auth/user-not-found") {
+      alert('This email was not found in our database.');
+    } else {
+      alert("Sorry, we don't know what went wrong.");
+      console.log(error.code + " " + error.message);
+    }
+    return;
+  }).then(function() {
+    //TODO add replace location to events
   });
 }
 
@@ -264,20 +265,38 @@ function getEvents() {
       event_content.append($('<h2 class="text-left">').text(evt.event_name_header + " ").append(event_type));
       event_content.append($('<h5 class="text-left">').text("Hosted by " + evt.event_host));
       event_content.append($('<p class="lead">').text(evt.event_message));
+
       var event_action = $('<div class="card-action">');
       var collapse_container = $('<div>');
       var collapse_body = $('<div class="collapse text-left">').attr('id', evt.collapse_id);
-      collapse_body.append($('<span class="label label-success">').text('Starts'));
-      var std = prettyDate(true, evt.start_date, evt.start_time);
-      collapse_body.append($('<p class="lead">').text(std));
-      var etd = prettyDate(true, evt.end_date, evt.end_time);
-      collapse_body.append($('<span class="label label-danger">').text('Ends'));
-      collapse_body.append($('<p class="lead">').text(etd));
+
+      var std = prettyDate(true, evt.start_date);
+      collapse_body.append($('<label>').text('Starts'));
+      collapse_body.append($('<p class="text-muted">').text(std));
+
+      var etd = prettyDate(true, evt.end_date);
+      collapse_body.append($('<label>').text('Ends'));
+      collapse_body.append($('<p class="text-muted">').text(etd));
+
+      var link = "<a href='http://maps.google.com/maps?q=" + encodeURIComponent(evt.event_location) + "' target='_blank'>" + evt.event_location + "</a>";
+
+      collapse_body.append($('<label>').text('Location'));
+      collapse_body.append($('<address class="address text-muted">').html(link));
+
+      collapse_body.append($('<label>').text('Guest List'));
+      var guest_list = $('<ul class="">');
+      var list = evt.event_guests.split(',');
+      for (var guest in list) {
+        guest_list.append($('<li>').text(list[guest]));
+      }
+      collapse_body.append(guest_list);
+
       var collapse_button = $('<a class="btn btn-default btn-collapse" data-toggle="collapse" aria-expanded="false" aria-controls="' + evt.collapse_id + '" role="button">').attr("href", "#" + evt.collapse_id).text('Read More');
       event_action.append(collapse_container.append(collapse_button, collapse_body));
       event.append(event_content);
       event.append(event_action);
       event_container.append(event);
+
       $('#events_container').prepend(event_container);
     }
   });
@@ -285,16 +304,15 @@ function getEvents() {
 
 function createEvent() {
   var random = (Math.random() + "").split(".")[1];
-  console.log(random);
   var event = {
     event_name_header: $('#event_name_header').val(),
-    event_type: $('#event_type_span').text(),
-    event_host: username,
-    // TODO add input and if null use username
+    event_type: $('#event_type').val(),
+    event_host: $('#event_host').val(),
     start_date: $('#event_start_date').val(),
-    start_time: $('#event_start_time').val(),
     end_date: $('#event_end_date').val(),
-    end_time: $('#event_end_time').val(),
+    event_location: $('#event_location_input').val(),
+    event_guests: $('#event_guests').val(),
+    event_message: $('#event_message').val(),
     collapse_id: "event_" + random
   }
   var isValid = false,
@@ -303,14 +321,18 @@ function createEvent() {
     if (event[key].length < 1) {
       isValid = false;
       keyTracker = key;
-      console.log(keyTracker);
       break;
     } else {
       isValid = true;
     }
   }
+  if (event.start_date <= event.end_date) {
+    isValid = false;
+    console.log(event.start_date);
+  }
   if (isValid) {
     writeNewEvent(event);
+    location.replace('index.html');
   } else {
     var elem = $('#' + keyTracker)[0];
   }
