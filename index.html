@@ -1,47 +1,29 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shindig</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/Pretty-Header.css">
-    <link rel="stylesheet" href="assets/css/Pretty-Registration-Form.css">
-    <link rel="stylesheet" href="assets/css/Material-Card.css">
-    <link rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.css">
-    <link rel="stylesheet" href="assets/css/Material-Card-1.css">
-    <link rel="stylesheet" href="assets/css/Pretty-Login-Form.css">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Basic React Page</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/normalize.css"/>
+    <link rel="stylesheet" href="src/css/skeleton.css"/>
+    <link rel="stylesheet" href="src/css/base.css"/>
+    <link rel="stylesheet" href="src/css/colors.css"/>
 
-<body>
-    <nav class="navbar navbar-default navbar-static-top custom-header">
-        <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand navbar-link" href="index.html">Shindig </a>
-                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar menu_button_span"></span><span class="icon-bar menu_button_span"></span><span class="icon-bar menu_button_span"></span></button>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li role="presentation"><a href="login.html" id="login_link" class="custom-navbar">Login </a></li>
-                    <li role="presentation"><a href="register.html" id="sign_up_button" class="custom-navbar"> Sign Up</a></li>
-                    <li role="presentation"><a href="#" id="logout_button" class="custom-navbar">Logout </a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="row">
-        <div class="col-xs-12">
-            <button class="btn btn-default btn-lg" type="button" id="new_event">Create a new event</button>
-        </div>
-    </div>
-    <div class="container-fluid" id="events_container"></div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <header class="navbar_header container-fluid" id="header"></header>
+    <main>
+      <section id="landing"></section>
+      <section id="content"></section>
+    </main>
+    <script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/moment.min.js"></script>
-</body>
-
+    <script type="text/javascript" src="src/js/main.js"></script>
+    <script type="text/babel" src="src/js/index.js"></script>
+  </body>
 </html>
