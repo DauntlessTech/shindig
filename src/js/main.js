@@ -1,4 +1,4 @@
-var database, birthday, isAuth, startDate, endDate, uid, username, loggedIn;
+var database, birthday, isAuth, startDate, endDate, uid, username;
 
 document.addEventListener('DOMContentLoaded', function() {
   init();
@@ -10,11 +10,6 @@ window.onload = function() {
   });
 }
 
-
-function logout() {
-  firebase.auth().signOut();
-  loggedIn = false;
-}
 'use strict';
 
 function init() {
@@ -36,10 +31,10 @@ function init() {
           username = snapshot.val().displayName;
           $('#event_host').attr('value', username);
         });
-        loggedIn = true;
+        document.cookie="true";
         getEvents();
       } else {
-        loggedIn = false;
+        document.cookie="false";
         console.log("Not currently logged in");
       }
     });
@@ -58,31 +53,31 @@ function AddScript(url, type) {
 'use strict';
 
 function addEventHandlers() {
-  $('#login_button').click(function(e) {
+  $('#login_button').click(function() {
     login();
   });
-  $('#logout_button').click(function(e) {
+  $('#logout_button').click(function() {
     logout();
   });
-  $('#register_submit').click(function(e) {
+  $('#register_submit').click(function() {
     register();
   });
   $('#collapse_toggle').click(function() {
     $('.collapse').slideToggle(500);
   });
-  $('#new_event').click(function(e) {
+  $('#new_event').click(function() {
     location.replace("create_event.html");
   });
-  $('#register_birthday').change(function(e) {
+  $('#register_birthday').change(function() {
     birthday = $(register_birthday).val();
   });
-  $('#event_start_date').change(function(e) {
+  $('#event_start_date').change(function() {
     startDate = $(event_start_date).val();
   });
-  $('#event_end_date').change(function(e) {
+  $('#event_end_date').change(function() {
     endDate = $(event_end_date).val();
   });
-  $('#create_event_submit_button').click(function(e) {
+  $('#create_event_submit_button').click(function() {
     createEvent();
   });
   $('#event_type li').on('click', function() {
@@ -227,15 +222,20 @@ function login(email, password) {
     var errorCode = error.code;
     var errorMessage = error.message;
     if (errorCode == "auth/user-not-found") {
-      alert('This email was not found in our database.');
+      console.log('This email was not found in our database.');
     } else {
-      alert("Sorry, we don't know what went wrong.");
+      console.log("Sorry, we don't know what went wrong.");
       console.log(error.code + " " + error.message);
     }
     return;
   }).then(function() {
-    //TODO add replace location to events
+    location.replace('index.html');
   });
+}
+
+function logout() {
+  firebase.auth().signOut();
+  location.replace('index.html');
 }
 
 function User(id, name, email, password, options) {
@@ -256,6 +256,11 @@ function writeUserData(register_user) {
 
 function getEvents() {
   firebase.database().ref('users/' + uid + '/events').once('value', function(snapshot) {
+    if(snapshot.val()){
+      console.log(true);
+    }else{
+      console.log(false);
+    }
     for (var snap in snapshot.val()) {
       var evt = snapshot.val()[snap].event;
       var event_container = $('<div class="col-md-4 col-sm-6 col-xs-12">');
@@ -326,7 +331,8 @@ function createEvent() {
       isValid = true;
     }
   }
-  if (event.start_date <= event.end_date) {
+  var sd = new Date(event.start_date), ed = new Date(event.end_date);
+  if (sd.getTime() == ed.getTime()) {
     isValid = false;
     console.log(event.start_date);
   }
