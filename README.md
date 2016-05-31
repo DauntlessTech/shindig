@@ -1,6 +1,13 @@
-# Shindig Event Planner | <small>A web application that allows people to create and share events with their friends.</small>
+# Shindig Event Planner
+This is a simple web application that utilizes React, Skeleton-Framework, and Firebase. These tools work in tandem to allow users to create and store events in the cloud.
 
-### DEVELOPMENT INSTRUCTIONS
+## Features
+- support for registration and logging in
+- allows users to create a new event
+- Event view that gets all events created by that user
+- saved login state using cookies allowing for quick access on return
+
+## DEVELOPMENT INSTRUCTIONS
 > _This application uses browser-sync as a dependency, so installing this application will also install browser-sync as a global package._
 
 ```
