@@ -263,15 +263,15 @@ function getEvents() {
     }
     for (var snap in snapshot.val()) {
       var evt = snapshot.val()[snap].event;
-      var event_container = $('<div class="col-md-4 col-sm-6 col-xs-12">');
-      var event = $('<div class="card">');
-      var event_content = $('<div class="card-content">');
+      var event_container = $('<div class="six columns">');
+      var event = $('<div class="container card">');
+      var event_content = $('<div class="row">');
       var event_type = $('<span class="text-muted">').text(" - " + evt.event_type);
       event_content.append($('<h2 class="text-left">').text(evt.event_name_header + " ").append(event_type));
       event_content.append($('<h5 class="text-left">').text("Hosted by " + evt.event_host));
       event_content.append($('<p class="lead">').text(evt.event_message));
 
-      var event_action = $('<div class="card-action">');
+      var event_action = $('<div class="row">');
       var collapse_container = $('<div>');
       var collapse_body = $('<div class="collapse text-left">').attr('id', evt.collapse_id);
 
@@ -296,7 +296,8 @@ function getEvents() {
       }
       collapse_body.append(guest_list);
 
-      var collapse_button = $('<a class="btn btn-default btn-collapse" data-toggle="collapse" aria-expanded="false" aria-controls="' + evt.collapse_id + '" role="button">').attr("href", "#" + evt.collapse_id).text('Read More');
+      var collapse_button = $('<a class="button button-primary collapse_toggle">')
+      .attr("onclick", "$('#" + evt.collapse_id + "').slideToggle(500);").text('Read More');
       event_action.append(collapse_container.append(collapse_button, collapse_body));
       event.append(event_content);
       event.append(event_action);
@@ -332,15 +333,18 @@ function createEvent() {
     }
   }
   var sd = new Date(event.start_date), ed = new Date(event.end_date);
-  if (sd.getTime() == ed.getTime()) {
-    isValid = false;
-    console.log(event.start_date);
-  }
+  // TODO fix datetime compare method
+  // if (sd.getTime() == ed.getTime()) {
+  //   isValid = false;
+  //   console.log(event.start_date);
+  // }
   if (isValid) {
     writeNewEvent(event);
-    location.replace('index.html');
+    location.replace('events.html');
   } else {
     var elem = $('#' + keyTracker)[0];
+    console.log(elem);
+    console.log(event[keyTracker]);
   }
 }
 
