@@ -16,7 +16,9 @@ var gulp = require('gulp'),
   sass = require('gulp-sass'),
   watch = require('gulp-watch'),
   cleanCSS = require('gulp-clean-css'),
-  sourcemaps = require('gulp-sourcemaps');
+  sourcemaps = require('gulp-sourcemaps'),
+  htmlmin = require('gulp-htmlmin');
+
 
 var onError = function(err) {
   notify.onError({
@@ -35,10 +37,10 @@ var jsFiles = {
 
   ],
   source: [
-    'assets/js/src/jquery.min.js',
-    'assets/js/src/main.js',
-    'assets/js/src/locationpicker.min.js',
-    'assets/js/src/components/index.jsx'
+    'src/assets/js/src/jquery.min.js',
+    'src/assets/js/src/main.js',
+    'src/assets/js/src/locationpicker.min.js',
+    'src/assets/js/src/components/*.jsx'
   ]
 };
 
@@ -50,18 +52,17 @@ gulp.task('eslint', function() {
         "ecmaVersion": 6,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true,
-            "js": true
+          "jsx": true
         },
         "ignore": '*.min.js'
       },
       "rules": {
-          "semi": 2
+        "semi": 2
       }
     }))
     .pipe(eslint.format())
     .on('data', function(file) {
-      if(file.eslint.messages && file.eslint.messages.length){
+      if (file.eslint.messages && file.eslint.messages.length) {
         gulp.fail = true;
       }
     });
@@ -76,23 +77,23 @@ process.on('exit', function() {
 // only if the copy in node_modules is "newer"
 gulp.task('copy-react', function() {
   return gulp.src('node_modules/react/dist/react.min.js')
-    .pipe(newer('assets/js/src/vendor/react.js'))
-    .pipe(gulp.dest('assets/js/src/vendor'));
+    .pipe(newer('src/assets/js/src/vendor/react.js'))
+    .pipe(gulp.dest('src/assets/js/src/vendor'));
 });
 gulp.task('copy-react-dom', function() {
   return gulp.src('node_modules/react-dom/dist/react-dom.min.js')
-    .pipe(newer('assets/js/src/vendor/react-dom.js'))
-    .pipe(gulp.dest('assets/js/src/vendor'));
+    .pipe(newer('src/assets/js/src/vendor/react-dom.js'))
+    .pipe(gulp.dest('src/assets/js/src/vendor'));
 });
 
 // Copy assets/js/vendor/* to assets/js
 gulp.task('copy-js-vendor', function() {
   return gulp
     .src([
-      'assets/js/src/vendor/react.js',
-      'assets/js/src/vendor/react-dom.js'
+      'src/assets/js/src/vendor/react.js',
+      'src/assets/js/src/vendor/react-dom.js'
     ])
-    .pipe(gulp.dest('assets/js'));
+    .pipe(gulp.dest('dist/assets/js'));
 });
 
 // Concatenate jsFiles.vendor and jsFiles.source into one JS file.
@@ -104,18 +105,18 @@ gulp.task('concat', ['copy-react', 'copy-react-dom', 'eslint'], function() {
     .pipe(babel({
       presets: ['react'],
       only: [
-        'assets/js/src/components',
+        'src/assets/js/src/components',
       ],
       compact: false
     }))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('assets/js'));
+    .pipe(gulp.dest('dist/assets/js'));
 });
 
 // Compile Sass to CSS
 gulp.task('sass', function() {
   var autoprefixerOptions = {
-    browsers: ['last 2 versions'],
+    browsers: ['last 3 versions'],
   };
 
   var filterOptions = '**/*.css';
@@ -123,21 +124,20 @@ gulp.task('sass', function() {
   var reloadOptions = {
     stream: true,
   };
-
   var sassOptions = {
     includePaths: [
 
     ]
   };
 
-  return gulp.src('assets/sass/**/*.scss')
+  return gulp.src(['src/assets/sass/skeleton.scss', 'src/assets/sass/colors.scss', 'src/assets/sass/base.scss'])
     .pipe(plumber(plumberOptions))
     .pipe(sourcemaps.init())
     .pipe(sass(sassOptions))
     .pipe(autoprefixer(autoprefixerOptions))
     .pipe(concat('styles.css'))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('assets/css'))
+    .pipe(gulp.dest('dist/assets/css/src'))
     .pipe(filter(filterOptions))
     .pipe(reload(reloadOptions));
 });
@@ -145,24 +145,30 @@ gulp.task('sass', function() {
 
 // Watch JS/JSX and Sass files
 gulp.task('watch', function() {
-  gulp.watch('assets/js/src/**/*.{js,jsx}', ['concat']);
-  gulp.watch('assets/sass/**/*.scss', ['sass']);
+  gulp.watch('src/assets/js/src/**/*.{js,jsx}', ['concat']);
+  gulp.watch('src/assets/sass/**/*.scss', ['sass', 'clean-css']);
+  gulp.watch('src/*.html', ['html']);
 });
 
-// gulp.task('clean-css', function() {
-//   return gulp.src('src/css/*.css')
-//     .pipe(gp_concat('styles.css'))
-//     .pipe(cleanCSS({
-//       compatibility: 'ie8'
-//     }))
-//     .pipe(gulp.dest('dist/css/'));
-// });
+gulp.task('clean-css', function() {
+  return gulp.src('dist/assets/css/src/*.css')
+    .pipe(cleanCSS({
+      compatibility: 'ie9'
+    }))
+    .pipe(gulp.dest('dist/assets/css/'));
+});
+
+gulp.task('html', function() {
+  return gulp.src('src/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('./dist'));
+});
 
 // BrowserSync
 gulp.task('browser-sync', function() {
   browserSync.init({
     server: {
-      baseDir: './'
+      baseDir: './dist'
     },
     open: false,
     online: false,
@@ -170,5 +176,5 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('build', ['sass', 'copy-js-vendor', 'concat']);
+gulp.task('build', ['html', 'sass', 'copy-js-vendor', 'concat']);
 gulp.task('default', ['build', 'browser-sync', 'watch']);
