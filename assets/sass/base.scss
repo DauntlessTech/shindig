@@ -1,9 +1,5 @@
-/*TODO MINIFY*/
-
-
 /* Navbar
 -------------------------------------------------- */
-
 .navbar_header {
   padding-top: 1rem !important;
 }
@@ -21,43 +17,19 @@
 
 /* Card
 -------------------------------------------------- */
-.card{
+
+.card {
   box-shadow: 0px 0px 4px #9e9e9e;
   border-radius: 3px;
   padding: 1rem;
 }
+
 /* Collapse
 -------------------------------------------------- */
 
 .collapse {
   display: none;
   padding: 1rem;
-}
-
-/* Icons
--------------------------------------------------- */
-
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-  /* Support for IE. */
-  font-feature-settings: 'liga';
 }
 
 /* Shared
@@ -132,8 +104,13 @@
 .text-center {
   text-align: center;
 }
+
 #event_location {
   width: auto;
   height: 0;
   margin: 10px;
+}
+
+.text-muted{
+  color: #9e9e9e;
 }

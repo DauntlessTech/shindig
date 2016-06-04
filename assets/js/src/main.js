@@ -8,9 +8,7 @@ window.onload = function() {
     addEventHandlers();
     createValidator();
   });
-}
-
-'use strict';
+};
 
 function init() {
   // Initialize Firebase and bootstrap js
@@ -50,13 +48,11 @@ function AddScript(url, type) {
   document.body.removeChild(document.body.lastChild);
 }
 
-'use strict';
-
 function addEventHandlers() {
   $('#login_button').click(function() {
     login();
   });
-  $('#logout_button').click(function() {
+  $('.logout_button').click(function() {
     logout();
   });
   $('#register_submit').click(function() {
@@ -214,7 +210,7 @@ function register() {
 }
 
 function login(email, password) {
-  if (email == null || password !== null) {
+  if (email === null || password !== null) {
     email = $('#login_email').val();
     password = $('#login_password').val();
   }
@@ -264,11 +260,11 @@ function getEvents() {
     for (var snap in snapshot.val()) {
       var evt = snapshot.val()[snap].event;
       var event_container = $('<div class="six columns">');
-      var event = $('<div class="container card">');
+      var main_event = $('<div class="container card">');
       var event_content = $('<div class="row">');
       var event_type = $('<span class="text-muted">').text(" - " + evt.event_type);
-      event_content.append($('<h2 class="text-left">').text(evt.event_name_header + " ").append(event_type));
-      event_content.append($('<h5 class="text-left">').text("Hosted by " + evt.event_host));
+      event_content.append($('<h4 class="text-left">').text(evt.event_name_header + " ").append(event_type));
+      event_content.append($('<strong class="text-left">').text("Hosted by " + evt.event_host));
       event_content.append($('<p class="lead">').text(evt.event_message));
 
       var event_action = $('<div class="row">');
@@ -299,9 +295,9 @@ function getEvents() {
       var collapse_button = $('<a class="button button-primary collapse_toggle">')
       .attr("onclick", "$('#" + evt.collapse_id + "').slideToggle(500);").text('Read More');
       event_action.append(collapse_container.append(collapse_button, collapse_body));
-      event.append(event_content);
-      event.append(event_action);
-      event_container.append(event);
+      main_event.append(event_content);
+      main_event.append(event_action);
+      event_container.append(main_event);
 
       $('#events_container').prepend(event_container);
     }
@@ -320,7 +316,8 @@ function createEvent() {
     event_guests: $('#event_guests').val(),
     event_message: $('#event_message').val(),
     collapse_id: "event_" + random
-  }
+  };
+
   var isValid = false,
     keyTracker;
   for (var key in event) {

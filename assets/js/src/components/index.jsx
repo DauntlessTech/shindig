@@ -1,4 +1,6 @@
 var path = location.href.replace(/(.+\w\/)(.+)/,"/$2");
+console.log(path);
+document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
 
 /* MenuItem - Buttons to go in the navbar
 --------------------------------------------- */
@@ -8,7 +10,7 @@ var MenuItem = React.createClass({
       <span className={this.props.classes}>
         <a className={this.props.link_class} href={this.props.href}>{this.props.text}</a>
       </span>
-    )
+    );
   }
 });
 
@@ -17,12 +19,12 @@ var MenuItem = React.createClass({
 var Navbar = React.createClass({
   render: function(){
     var loginButton, signupButton, myEventsButton, newEventButton;
+
     if (document.cookie == "false") {
       loginButton = <MenuItem classes="u-pull-right margin-right-50" link_class="button" href="login.html" text="Login" />;
       signupButton = <MenuItem classes="u-pull-right" link_class="button button-primary" href="register.html" text="Signup" />;
       myEventsButton = null;
       newEventButton = null;
-      event
     } else {
       loginButton = <MenuItem classes="u-pull-right margin-right-50" link_class="button logout_button" text="Logout"/>;
       signupButton = null;
@@ -37,7 +39,7 @@ var Navbar = React.createClass({
         {signupButton}
         {loginButton}
       </nav>
-    )
+    );
   }
 });
 
@@ -56,7 +58,7 @@ var LandingPage = React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
   }
 });
 
@@ -74,7 +76,7 @@ var MainContent = React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
   }
 });
 
@@ -163,7 +165,7 @@ var Register = React.createClass({
           <input type="button" className="button button-primary" id="register_submit" value="Register"/>
         </div>
       </form>
-    )
+    );
   }
 });
 
@@ -207,7 +209,8 @@ var LoginForm = React.createClass({
 
         </form>
       </div>
-    )}
+    );
+  }
 });
 
 /* Create Event
@@ -311,9 +314,9 @@ var CreateEvent = React.createClass({
         <hr/>
         <a className="button button-primary" id="create_event_submit_button">Create</a>
       </form>
-    )
+    );
   }
-})
+});
 
 /* Determine Login Status - Not working
 --------------------------------------------- */
@@ -322,7 +325,7 @@ ReactDOM.render( <Navbar /> , document.getElementById('navbar_header'));
 /* Render Switch
 --------------------------------------------- */
 switch(path){
-  case '/':
+  case 'http://localhost:3000/':
     renderLandingPage();
     break;
 
@@ -340,6 +343,10 @@ switch(path){
 
   case '/create_event.html':
     ReactDOM.render( <CreateEvent /> , document.getElementById('create_event_form_container'));
+    break;
+
+  case '':
+    renderLandingPage();
     break;
 }
 
