@@ -351,10 +351,10 @@ function getEvents() {
 
       var link = "<a href='http://maps.google.com/maps?q=" + encodeURIComponent(evt.event_location) + "' target='_blank'>" + evt.event_location + "</a>";
 
-      collapse_body.append($('<label>').text('Location'));
+      collapse_body.append($('<span>').text('Location'));
       collapse_body.append($('<address class="address text-muted">').html(link));
 
-      collapse_body.append($('<label>').text('Guest List'));
+      collapse_body.append($('<span>').text('Guest List'));
       var guest_list = $('<ul class="">');
       var list = evt.event_guests.split(',');
       for (var guest in list) {
