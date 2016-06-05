@@ -96,7 +96,7 @@ var Register = React.createClass({
             <label for="register_name">Name</label>
           </div>
           <div className="six columns">
-            <input className="u-full-width" type="text" name="fname" required minlength="3" autofocus="" autocomplete="on" id="register_name"/>
+            <input className="u-full-width" type="text" name="fname" required minlength="3" id="register_name" autoFocus="true" />
           </div>
         </div>
 
@@ -183,7 +183,7 @@ var LoginForm = React.createClass({
               <label for="login_email">Email</label>
             </div>
             <div className="six columns">
-              <input className="u-full-width" type="text" name="fname" required autofocus autocomplete="on" id="login_email"/>
+              <input className="u-full-width" type="text" name="fname" required autofocus autocomplete="on" id="login_email" autoFocus="true"/>
             </div>
           </div>
 
@@ -221,14 +221,14 @@ var CreateEvent = React.createClass({
     return(
       <form className="section create_event_form">
         <h1>New Event Creation Form</h1>
-        
+
         {/* Event Name */}
         <div className="row">
           <div className="four columns">
             <label for="event_name_header">Event Name</label>
           </div>
           <div className="six columns">
-            <input className="u-full-width" type="text" id="event_name_header" name="event_name_header" required/>
+            <input className="u-full-width" type="text" id="event_name_header" name="event_name_header" required autoFocus="true"/>
           </div>
         </div>
 
@@ -307,7 +307,7 @@ var CreateEvent = React.createClass({
               <label for="event_guests">Guest List</label>
             </div>
             <div className="six columns">
-              <textarea className="u-full-width" name="event_guests" id="event_guests" formnovalidate></textarea>
+              <textarea className="u-full-width" name="event_guests" id="event_guests" required></textarea>
             </div>
           </div>
         </div>
