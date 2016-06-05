@@ -99,8 +99,27 @@ function createValidator() {
     if (value) return value > target.val();
     else return this.optional(element);
   }, "Does not match");
+
   $.validator.addMethod("email", function(value) {
-    return (/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i).test(value);
+    /**
+      * Dear Rick,
+      *
+      * I understand that this regex invalidates emails that are actually valid,
+      * and I do understand why I should change it. And I will, if need be.
+      * But first I would like you to consider this, firebase requires and extension.
+      * That means that if I were to allow valid emails without extensions, I would have to force
+      * an extension on every user, wheras simply requiring them to supply their own extension would
+      * mean less work for the database, and the user in the log run.
+      *
+      * I have not found any information that will allow me to add an email without an extension to firebase,
+      * but if I do come across any information regarding the matter I will promptly change this code. Until then,
+      * I fear it must stay.
+      *
+      * Sincerely,
+      *
+      * Morty
+      */
+    return (/^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/).test(value);
   });
   $.validator.addMethod("pwcheckupper", function(value) {
     return (/[A-Z]/).test(value); // has an uppercase letter
@@ -185,6 +204,10 @@ function createValidator() {
       event_location_input: {
         required: true,
         minlength: 2
+      },
+      event_guests: {
+        required: true,
+        minlength: 2
       }
     },
     messages: {
@@ -206,6 +229,9 @@ function createValidator() {
         datingParadox: "The end date cannot take place before the start date."
       },
       event_location_input: {
+        required: "This field is required"
+      },
+      event_guests: {
         required: "This field is required"
       }
     }
@@ -316,11 +342,11 @@ function getEvents() {
       var collapse_body = $('<div class="collapse text-left">').attr('id', evt.collapse_id);
 
       var std = prettyDate(evt.start_date);
-      collapse_body.append($('<label>').text('Starts'));
+      collapse_body.append($('<span>').text('Starts'));
       collapse_body.append($('<p class="text-muted">').text(std));
 
       var etd = prettyDate(evt.end_date);
-      collapse_body.append($('<label>').text('Ends'));
+      collapse_body.append($('<span>').text('Ends'));
       collapse_body.append($('<p class="text-muted">').text(etd));
 
       var link = "<a href='http://maps.google.com/maps?q=" + encodeURIComponent(evt.event_location) + "' target='_blank'>" + evt.event_location + "</a>";
