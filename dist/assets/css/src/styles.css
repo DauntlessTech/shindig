@@ -162,7 +162,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #ee8377;
   border-color: #ee8377; }
 
-input[type="email"], input[type="number"], input[type="date"], input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select {
+input[type="email"], input[type="number"], input[type="date"], input[type="datetime-local"], datalist, input[type="search"], input[type="text"], input[type="tel"], input[type="url"], input[type="password"], textarea, select {
   padding: 0.4rem 0.6rem;
   background-color: #fff;
   border: 1px solid #d1d1d1;
@@ -657,6 +657,22 @@ input[type="date"] {
      -moz-appearance: none;
           appearance: none; }
   input[type="date"]:focus {
+    border: 1px solid #33c3f0;
+    outline: 0; }
+
+input[type="datetime-local"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
+  input[type="datetime-local"]:focus {
+    border: 1px solid #33c3f0;
+    outline: 0; }
+
+datalist {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
+  datalist:focus {
     border: 1px solid #33c3f0;
     outline: 0; }
 

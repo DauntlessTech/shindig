@@ -1217,6 +1217,22 @@ input[type="date"] {
 		outline: 0;
 	}
 }
+input[type="datetime-local"] {
+	@extend %extend_17;
+	appearance: none;
+	&:focus {
+		border: 1px solid $color_picton_blue_approx;
+		outline: 0;
+	}
+}
+datalist {
+	@extend %extend_17;
+	appearance: none;
+	&:focus {
+		border: 1px solid $color_picton_blue_approx;
+		outline: 0;
+	}
+}
 input[type="search"] {
 	@extend %extend_17;
 	height: 2.5rem;

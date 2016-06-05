@@ -92,40 +92,41 @@ var Register = React.createClass({
 
         {/* Name*/}
         <div className="row">
-          <div className="four columns">
-            <label for="register_name">Name</label>
-          </div>
+          <div className="three columns"></div>
           <div className="six columns">
-            <input className="u-full-width" type="text" name="fname" required minlength="3" id="register_name" autoFocus="true" />
+            <label for="register_name">Name
+              <input className="u-full-width" type="text" name="fname" required minlength="3" id="register_name" autoFocus="true" />
+            </label>
           </div>
         </div>
 
         {/* Email */}
         <div className="row">
-          <div className="four columns">
-            <label for="regist_email">Email</label>
-          </div>
+          <div className="three columns"></div>
           <div className="six columns">
-            <input className="u-full-width" type="email" name="email" required pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" inputmode="email" id="register_email" />
+            <label for="register_email">
+              Email
+              <input className="u-full-width" type="email" name="email" required pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" inputmode="email" id="register_email" />
+            </label>
           </div>
         </div>
 
         {/* Password */}
         <div>
           <div className="row">
-            <div className="four columns">
-              <label for="register_password">Password</label>
-            </div>
+          <div className="three columns"></div>
             <div className="six columns">
-              <input className="u-full-width" id="register_password" type="password" name="password_one" required />
+              <label for="register_password">Password
+                <input className="u-full-width" id="register_password" type="password" name="password_one" required />
+              </label>
             </div>
           </div>
           <div className="row">
-            <div className="four columns">
-              <label for="register_password_2">Repeat Password</label>
-            </div>
+            <div className="three columns"></div>
             <div className="six columns">
-              <input className="u-full-width" id="register_password_2" type="password" name="password_two" required />
+              <label for="register_password_2">Repeat Password
+                <input className="u-full-width" id="register_password_2" type="password" name="password_two" required />
+              </label>
             </div>
           </div>
         </div>
@@ -136,27 +137,27 @@ var Register = React.createClass({
         </div>
         <div className="collapse">
           <div className="row">
-            <div className="four columns">
-              <label for="register_employer">Employeer</label>
-            </div>
+            <div className="three columns"></div>
             <div className="six columns">
-              <input className="u-full-width" type="text" name="employer" id="register_employer" />
+              <label for="register_employer">Employeer
+                <input className="u-full-width" type="text" name="employer" id="register_employer" />
+              </label>
             </div>
           </div>
           <div className="row">
-            <div className="four columns">
-              <label for="register_job_title">Job Title</label>
-            </div>
+            <div className="three columns"></div>
             <div className="six columns">
-              <input className="u-full-width" type="text" name="title" id="register_job_title" />
+              <label for="register_job_title">Job Title
+                <input className="u-full-width" type="text" name="title" id="register_job_title" />
+              </label>
             </div>
           </div>
           <div className="row">
-            <div className="four columns">
-              <label for="register_birthday">Birthday</label>
-            </div>
+            <div className="three columns"></div>
             <div className="six columns">
-              <input className="u-full-width" type="date" name="title" id="register_birthday" />
+              <label for="register_birthday">Birthday
+                <input className="u-full-width" type="date" name="title" id="register_birthday" />
+              </label>
             </div>
           </div>
         </div>
@@ -175,24 +176,24 @@ var Register = React.createClass({
 var LoginForm = React.createClass({
   render: function(){
     return(
-      <div className="container text-center">
+      <div className="container">
         <form className="section">
 
           <div className="row">
-            <div className="four columns">
-              <label for="login_email">Email</label>
-            </div>
-            <div className="six columns">
-              <input className="u-full-width" type="text" name="fname" required autofocus autocomplete="on" id="login_email" autoFocus="true"/>
+            <div className="three columns"></div>
+            <div className="six columns text-left">
+              <label for="login_email">Email
+                <input className="u-full-width" type="text" name="fname" required autofocus autocomplete="on" id="login_email" autoFocus="true"/>
+              </label>
             </div>
           </div>
 
           <div className="row">
-            <div className="four columns">
-              <label for="login_password">Password</label>
-            </div>
-            <div className="six columns">
-              <input className="u-full-width" type="password" required autofocus autocomplete="on" id="login_password"/>
+            <div className="three columns"></div>
+            <div className="six columns text-left">
+              <label for="login_password">Password
+                <input className="u-full-width" type="password" required autofocus autocomplete="on" id="login_password"/>
+              </label>
             </div>
           </div>
 
@@ -219,72 +220,71 @@ var LoginForm = React.createClass({
 var CreateEvent = React.createClass({
   render:function(){
     return(
-      <form className="section create_event_form">
-        <h1>New Event Creation Form</h1>
+      <form className="section create_event_form container">
+        <h1>Create a New Event</h1>
 
         {/* Event Name */}
-        <div className="row">
-          <div className="four columns">
-            <label for="event_name_header">Event Name</label>
-          </div>
+        <div className="row text-left">
+          <div className="three columns"></div>
           <div className="six columns">
-            <input className="u-full-width" type="text" id="event_name_header" name="event_name_header" required autoFocus="true"/>
+            <label for="event_name_header">Event Name
+              <input className="u-full-width" type="text" id="event_name_header" name="event_name_header" required autoFocus="true"/>
+            </label>
           </div>
         </div>
 
         {/* Event Host */}
-        <div className="row">
-          <div className="four columns">
-            <label for="event_host">Event Host</label>
-          </div>
+        <div className="row text-left">
+          <div className="three columns"></div>
           <div className="six columns">
-            <input className="u-full-width" type="text" name="event_host" id="event_host" required/>
+            <label for="event_host">Event Host
+              <input className="u-full-width" type="text" name="event_host" id="event_host" required/>
+            </label>
           </div>
         </div>
 
         {/* Event Type */}
-        <div className="row">
-          <div className="four columns">
-            <label for="event_type">Event Type</label>
-          </div>
+        <div className="row text-left">
+          <div className="three columns"></div>
           <div className="six columns">
-            <input className="u-full-width" list="event_type_list" id="event_type" name="event_type" required/>
-            <datalist id="event_type_list">
-              <option value="Party"></option>
-              <option value="Meeting"></option>
-              <option value="Adventure"></option>
-            </datalist>
+            <label for="event_type">Event Type
+              <input className="u-full-width" type="list" list="event_type_list" id="event_type" name="event_type" required/>
+              <datalist id="event_type_list">
+                <option value="Party"></option>
+                <option value="Meeting"></option>
+                <option value="Adventure"></option>
+              </datalist>
+            </label>
           </div>
         </div>
 
         {/* Event Start Time */}
-        <div className="row">
-          <div className="four columns">
-            <label for="event_start_date">Start Time</label>
-          </div>
+        <div className="row text-left">
+          <div className="three columns"></div>
           <div className="six columns">
-            <input className="u-full-width" type="datetime-local" name="event_start_date" id="event_start_date" required />
+            <label for="event_start_date">Start Time
+              <input className="u-full-width" type="datetime-local" name="event_start_date" id="event_start_date" required />
+            </label>
           </div>
         </div>
 
         {/* Event End Time */}
-        <div className="row">
-          <div className="four columns">
-            <label for="event_end_date">End Time</label>
-          </div>
+        <div className="row text-left">
+          <div className="three columns"></div>
           <div className="six columns">
-            <input className="u-full-width" type="datetime-local" name="event_end_date" id="event_end_date" required />
+            <label for="event_end_date">End Time
+              <input className="u-full-width" type="datetime-local" name="event_end_date" id="event_end_date" required />
+            </label>
           </div>
         </div>
 
         {/* Event Location */}
-        <div className="row">
-          <div className="four columns">
-            <label for="event_location_input">Location</label>
-          </div>
+        <div className="row text-left">
+          <div className="three columns"></div>
           <div className="six columns">
-            <input className="u-full-width" type="text" id="event_location_input" name="event_location_input" required/>
-            <div className="row" id="event_location"></div>
+            <label for="event_location_input">Location
+              <input className="u-full-width" type="text" id="event_location_input" name="event_location_input" required/>
+            </label>
           </div>
         </div>
 
@@ -292,22 +292,22 @@ var CreateEvent = React.createClass({
         <div className="row text-center">
           <input type="button" className="button" id="collapse_toggle" value="Add More" />
         </div>
-        <div className="collapse row" id="add_more_to_event">
+        <div className="collapse row text-left" id="add_more_to_event">
           <div className="row">
-            <div className="four columns">
-              <label for="event_message">Add a Message</label>
-            </div>
+            <div className="three columns"></div>
             <div className="six columns">
-              <textarea className="u-full-width" name="event_message" id="event_message" formnovalidate></textarea>
+              <label for="event_message">Add a Message
+                <textarea className="u-full-width" name="event_message" id="event_message" formnovalidate></textarea>
+              </label>
             </div>
           </div>
 
           <div className="row">
-            <div className="four columns">
-              <label for="event_guests">Guest List</label>
-            </div>
+            <div className="three columns"></div>
             <div className="six columns">
-              <textarea className="u-full-width" name="event_guests" id="event_guests" required></textarea>
+              <label for="event_guests">Guest List <small className="text-muted">(seperate guest emails with a comma)</small>
+                <textarea className="u-full-width" name="event_guests" id="event_guests" required></textarea>
+              </label>
             </div>
           </div>
         </div>
@@ -326,7 +326,11 @@ ReactDOM.render( <Navbar /> , document.getElementById('navbar_header'));
 /* Render Switch
 --------------------------------------------- */
 switch(path){
-  case 'http://localhost:3000/':
+case 'http://localhost:3000/':
+    renderLandingPage();
+    break;
+
+case 'https://www.zacharyfoutz.com/projects/shindig/':
     renderLandingPage();
     break;
 
