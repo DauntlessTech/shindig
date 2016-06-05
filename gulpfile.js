@@ -103,7 +103,7 @@ gulp.task('concat', ['copy-react', 'copy-react-dom', 'eslint'], function() {
     .pipe(sourcemaps.init())
     .pipe(concat('app.js'))
     .pipe(babel({
-      presets: ['react'],
+      presets: ['React'],
       only: [
         'src/assets/js/src/components',
       ],

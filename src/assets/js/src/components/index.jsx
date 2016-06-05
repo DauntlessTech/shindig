@@ -221,7 +221,7 @@ var CreateEvent = React.createClass({
     return(
       <form className="section create_event_form">
         <h1>New Event Creation Form</h1>
-
+        
         {/* Event Name */}
         <div className="row">
           <div className="four columns">
