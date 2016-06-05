@@ -37,10 +37,9 @@ var jsFiles = {
 
   ],
   source: [
+    'src/assets/js/src/components/*.jsx',
     'src/assets/js/src/jquery.min.js',
-    'src/assets/js/src/main.js',
-    'src/assets/js/src/locationpicker.min.js',
-    'src/assets/js/src/components/*.jsx'
+    'src/assets/js/src/main.js'
   ]
 };
 
@@ -98,16 +97,17 @@ gulp.task('copy-js-vendor', function() {
 
 // Concatenate jsFiles.vendor and jsFiles.source into one JS file.
 // Run copy-react and eslint before concatenating
-gulp.task('concat', ['copy-react', 'copy-react-dom', 'eslint'], function() {
+gulp.task('concat', ['eslint', 'copy-react', 'copy-react-dom'], function() {
   return gulp.src(jsFiles.vendor.concat(jsFiles.source))
     .pipe(sourcemaps.init())
     .pipe(concat('app.js'))
     .pipe(babel({
-      presets: ['React'],
+      presets: ['react'],
       only: [
         'src/assets/js/src/components',
+        'src/assets/js/src/*.js'
       ],
-      compact: false
+      compact: true
     }))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist/assets/js'));
@@ -145,7 +145,8 @@ gulp.task('sass', function() {
 
 // Watch JS/JSX and Sass files
 gulp.task('watch', function() {
-  gulp.watch('src/assets/js/src/**/*.{js,jsx}', ['concat']);
+  gulp.watch('src/assets/js/src/components/*.jsx', ['concat']);
+  gulp.watch('src/assets/js/src/*.js', ['concat']);
   gulp.watch('src/assets/sass/**/*.scss', ['sass', 'clean-css']);
   gulp.watch('src/*.html', ['html']);
 });
@@ -176,5 +177,5 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('build', ['html', 'sass', 'copy-js-vendor', 'concat']);
+gulp.task('build', ['html', 'sass', 'concat', 'copy-js-vendor']);
 gulp.task('default', ['build', 'browser-sync', 'watch']);
