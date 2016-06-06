@@ -94,7 +94,7 @@ var Register = React.createClass({
         <div className="row">
           <div className="three columns"></div>
           <div className="six columns">
-            <label for="register_name">Name
+            <label htmlFor="register_name">Name
               <input className="u-full-width" type="text" name="fname" required minlength="3" id="register_name" autoFocus="true" />
             </label>
           </div>
@@ -104,7 +104,7 @@ var Register = React.createClass({
         <div className="row">
           <div className="three columns"></div>
           <div className="six columns">
-            <label for="register_email">
+            <label htmlFor="register_email">
               Email
               <input className="u-full-width" type="email" name="email" required pattern="[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" inputmode="email" id="register_email" />
             </label>
@@ -116,7 +116,7 @@ var Register = React.createClass({
           <div className="row">
           <div className="three columns"></div>
             <div className="six columns">
-              <label for="register_password">Password
+              <label htmlFor="register_password">Password
                 <input className="u-full-width" id="register_password" type="password" name="password_one" required />
               </label>
             </div>
@@ -124,7 +124,7 @@ var Register = React.createClass({
           <div className="row">
             <div className="three columns"></div>
             <div className="six columns">
-              <label for="register_password_2">Repeat Password
+              <label htmlFor="register_password_2">Repeat Password
                 <input className="u-full-width" id="register_password_2" type="password" name="password_two" required />
               </label>
             </div>
@@ -139,7 +139,7 @@ var Register = React.createClass({
           <div className="row">
             <div className="three columns"></div>
             <div className="six columns">
-              <label for="register_employer">Employeer
+              <label htmlFor="register_employer">Employeer
                 <input className="u-full-width" type="text" name="employer" id="register_employer" />
               </label>
             </div>
@@ -147,7 +147,7 @@ var Register = React.createClass({
           <div className="row">
             <div className="three columns"></div>
             <div className="six columns">
-              <label for="register_job_title">Job Title
+              <label htmlFor="register_job_title">Job Title
                 <input className="u-full-width" type="text" name="title" id="register_job_title" />
               </label>
             </div>
@@ -155,7 +155,7 @@ var Register = React.createClass({
           <div className="row">
             <div className="three columns"></div>
             <div className="six columns">
-              <label for="register_birthday">Birthday
+              <label htmlFor="register_birthday">Birthday
                 <input className="u-full-width" type="date" name="title" id="register_birthday" />
               </label>
             </div>
@@ -182,7 +182,7 @@ var LoginForm = React.createClass({
           <div className="row">
             <div className="three columns"></div>
             <div className="six columns text-left">
-              <label for="login_email">Email
+              <label htmlFor="login_email">Email
                 <input className="u-full-width" type="text" name="fname" required autofocus autocomplete="on" id="login_email" autoFocus="true"/>
               </label>
             </div>
@@ -191,14 +191,14 @@ var LoginForm = React.createClass({
           <div className="row">
             <div className="three columns"></div>
             <div className="six columns text-left">
-              <label for="login_password">Password
+              <label htmlFor="login_password">Password
                 <input className="u-full-width" type="password" required autofocus autocomplete="on" id="login_password"/>
               </label>
             </div>
           </div>
 
           <div className="row">
-            <label for="remember_me">
+            <label htmlFor="remember_me">
               <input type="checkbox" id="remember_me"/>
               &nbsp;
               Remember My Email
@@ -227,7 +227,7 @@ var CreateEvent = React.createClass({
         <div className="row text-left">
           <div className="three columns"></div>
           <div className="six columns">
-            <label for="event_name_header">Event Name
+            <label htmlFor="event_name_header">Event Name
               <input className="u-full-width" type="text" id="event_name_header" name="event_name_header" required autoFocus="true"/>
             </label>
           </div>
@@ -237,7 +237,7 @@ var CreateEvent = React.createClass({
         <div className="row text-left">
           <div className="three columns"></div>
           <div className="six columns">
-            <label for="event_host">Event Host
+            <label htmlFor="event_host">Event Host
               <input className="u-full-width" type="text" name="event_host" id="event_host" required/>
             </label>
           </div>
@@ -247,7 +247,7 @@ var CreateEvent = React.createClass({
         <div className="row text-left">
           <div className="three columns"></div>
           <div className="six columns">
-            <label for="event_type">Event Type
+            <label htmlFor="event_type">Event Type
               <input className="u-full-width" type="list" list="event_type_list" id="event_type" name="event_type" required/>
               <datalist id="event_type_list">
                 <option value="Party"></option>
@@ -262,7 +262,7 @@ var CreateEvent = React.createClass({
         <div className="row text-left">
           <div className="three columns"></div>
           <div className="six columns">
-            <label for="event_start_date">Start Time
+            <label htmlFor="event_start_date">Start Time
               <input className="u-full-width" type="datetime-local" name="event_start_date" id="event_start_date" required />
             </label>
           </div>
@@ -272,7 +272,7 @@ var CreateEvent = React.createClass({
         <div className="row text-left">
           <div className="three columns"></div>
           <div className="six columns">
-            <label for="event_end_date">End Time
+            <label htmlFor="event_end_date">End Time
               <input className="u-full-width" type="datetime-local" name="event_end_date" id="event_end_date" required />
             </label>
           </div>
@@ -282,7 +282,7 @@ var CreateEvent = React.createClass({
         <div className="row text-left">
           <div className="three columns"></div>
           <div className="six columns">
-            <label for="event_location_input">Location
+            <label htmlFor="event_location_input">Location
               <input className="u-full-width" type="text" id="event_location_input" name="event_location_input" required/>
             </label>
           </div>
@@ -296,7 +296,7 @@ var CreateEvent = React.createClass({
           <div className="row">
             <div className="three columns"></div>
             <div className="six columns">
-              <label for="event_message">Add a Message
+              <label htmlFor="event_message">Add a Message
                 <textarea className="u-full-width" name="event_message" id="event_message" formnovalidate></textarea>
               </label>
             </div>
@@ -305,7 +305,7 @@ var CreateEvent = React.createClass({
           <div className="row">
             <div className="three columns"></div>
             <div className="six columns">
-              <label for="event_guests">Guest List <small className="text-muted">(seperate guest emails with a comma)</small>
+              <label htmlFor="event_guests">Guest List <small className="text-muted">(seperate guest emails with a comma)</small>
                 <textarea className="u-full-width" name="event_guests" id="event_guests" required></textarea>
               </label>
             </div>
